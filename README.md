@@ -1,0 +1,1 @@
+## Solver kinematyki dwuwymiarowych układów wieloczłonowych

@@ -1,4 +1,7 @@
 function [answer1, tf1, answer2, tf2] = handle_input_dlg(c)
+% pomocnicza funkcja zwracająca wybór użytkownika co do wyświetlania
+% wykresów dla zaznaczonych wykresów oraz format docelowych plików z
+% wykresami
 
 for i = 1:numel(c.x)
     list_string1{i} = "c" + num2str(i);

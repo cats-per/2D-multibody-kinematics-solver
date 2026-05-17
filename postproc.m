@@ -52,6 +52,22 @@ ustawienia.rozmiarCzcionkiBig = 15; % title
 
 ustawienia.wyswietl = 'off';
 
+legenda.r = ["r_x", "r_y"];
+legenda.fi = "\phi";
+legenda.dr = ["v_x", "v_y"];
+legenda.dfi = "\omega";
+legenda.d2r = ["a_x", "a_y"];
+legenda.d2fi = "\epsilon";
+legenda.trajektoria = "y(x)";
+
+label.x = "czas [s]";
+label.r = "położenie [m]";
+label.fi = "\phi [rad]";
+label.dr = "v [m/s]";
+label.dfi = "\omega [rad/s]";
+label.d2r = "a [m/s^2]";
+label.d2fi = "\epsilon [rad/s^2]";
+
 %% wykresy dla środków mas
 
 for i = 1:numel(c.x)
@@ -71,70 +87,54 @@ for i = 1:numel(c.x)
     end
 
     % zdefiniowanie nazw wykresów i ich opisów
-    tytul_r = strcat("położenie członu ", num2str(i));
-    tytul_fi = strcat("kąt obrotu członu ", num2str(i));
-    tytul_dr = strcat("prędkość liniowa członu ", num2str(i));
-    tytul_dfi = strcat("prędkość obrotowa członu ", num2str(i));
-    tytul_d2r = strcat("przyspieszenie liniowe członu ", num2str(i));
-    tytul_d2fi = strcat("przeyspieszenie obrotowe członu ", num2str(i));
-    tytul_trajektoria = "trajektoria członu " + num2str(i);
+    tytul.r = strcat("położenie członu ", num2str(i));
+    tytul.fi = strcat("kąt obrotu członu ", num2str(i));
+    tytul.dr = strcat("prędkość liniowa członu ", num2str(i));
+    tytul.dfi = strcat("prędkość obrotowa członu ", num2str(i));
+    tytul.d2r = strcat("przyspieszenie liniowe członu ", num2str(i));
+    tytul.d2fi = strcat("przeyspieszenie obrotowe członu ", num2str(i));
+    tytul.trajektoria = "trajektoria członu " + num2str(i);
 
-    tytul_plik_r = "czlon_" + num2str(i) + "_r";
-    tytul_plik_fi = "czlon_" + num2str(i) + "_fi";
-    tytul_plik_dr = "czlon_" + num2str(i) + "_dr";
-    tytul_plik_dfi = "czlon_" + num2str(i) + "_dfi";
-    tytul_plik_d2r = "czlon_" + num2str(i) + "_d2r";
-    tytul_plik_d2fi = "czlon_" + num2str(i) + "_d2fi";
-    tytul_plik_trajektoria = "czlon_" + num2str(i) + "_trajektoria";
+    tytul.plik.r = "czlon_" + num2str(i) + "_r";
+    tytul.plik.fi = "czlon_" + num2str(i) + "_fi";
+    tytul.plik.dr = "czlon_" + num2str(i) + "_dr";
+    tytul.plik.dfi = "czlon_" + num2str(i) + "_dfi";
+    tytul.plik.d2r = "czlon_" + num2str(i) + "_d2r";
+    tytul.plik.d2fi = "czlon_" + num2str(i) + "_d2fi";
+    tytul.plik.trajektoria = "czlon_" + num2str(i) + "_trajektoria";
 
-    legenda_r = ["r_x", "r_y"];
-    legenda_fi = "\phi";
-    legenda_dr = ["v_x", "v_y"];
-    legenda_dfi = "\omega";
-    legenda_d2r = ["a_x", "a_y"];
-    legenda_d2fi = "\epsilon";
-    legenda_trajektoria = "y(x)";
-
-    label_x = "czas [s]";
-    label_r = "położenie [m]";
-    label_fi = "\phi [rad]";
-    label_dr = "v [m/s]";
-    label_dfi = "\omega [rad/s]";
-    label_d2r = "a [m/s^2]";
-    label_d2fi = "\epsilon [rad/s^2]";
-
-    kolumna_rx = "czlon_" + num2str(i) + "_rx";
-    kolumna_ry = "czlon_" + num2str(i) + "_ry";
-    kolumna_fi = "czlon_" + num2str(i) + "_fi";
-    kolumna_vx = "czlon_" + num2str(i) + "_vx";
-    kolumna_vy = "czlon_" + num2str(i) + "_vy";
-    kolumna_dfi = "czlon_" + num2str(i) + "_dfi";
-    kolumna_ax = "czlon_" + num2str(i) + "_ax";
-    kolumna_ay = "czlon_" + num2str(i) + "_ay";
-    kolumna_d2fi = "czlon_" + num2str(i) + "_d2fi";
+    kolumna.rx = "czlon_" + num2str(i) + "_rx";
+    kolumna.ry = "czlon_" + num2str(i) + "_ry";
+    kolumna.fi = "czlon_" + num2str(i) + "_fi";
+    kolumna.vx = "czlon_" + num2str(i) + "_vx";
+    kolumna.vy = "czlon_" + num2str(i) + "_vy";
+    kolumna.dfi = "czlon_" + num2str(i) + "_dfi";
+    kolumna.ax = "czlon_" + num2str(i) + "_ax";
+    kolumna.ay = "czlon_" + num2str(i) + "_ay";
+    kolumna.d2fi = "czlon_" + num2str(i) + "_d2fi";
 
     % przekazanie danych o wykresach i-tego członu do pomocniczych funkcji
     % plotujących i zapisujących do plików pdf
     disp("drukuję człon " + num2str(i));
-    Plotuj_r(r, T, tytul_r, legenda_r, label_r, label_x, tytul_plik_r, ustawienia);
-    Plotuj_r(dr, T, tytul_dr, legenda_dr, label_dr, label_x, tytul_plik_dr, ustawienia);
-    Plotuj_r(d2r, T, tytul_d2r, legenda_d2r, label_d2r, label_x, tytul_plik_d2r, ustawienia);
-    Plotuj_fi(fi, T, tytul_fi, legenda_fi, label_fi, label_x, tytul_plik_fi, ustawienia);
-    Plotuj_fi(dfi, T, tytul_dfi, legenda_dfi, label_dfi, label_x, tytul_plik_dfi, ustawienia);
-    Plotuj_fi(d2fi, T, tytul_d2fi, legenda_d2fi, label_d2fi, label_x, tytul_plik_d2fi, ustawienia);
-    Plotuj_fi(r(2,:), r(1,:), tytul_trajektoria, legenda_trajektoria, "y [m]", "x [m]", tytul_plik_trajektoria, ustawienia);
+    Plotuj_r(r, T, tytul.r, legenda.r, label.r, label.x, tytul.plik.r, ustawienia);
+    Plotuj_r(dr, T, tytul.dr, legenda.dr, label.dr, label.x, tytul.plik.dr, ustawienia);
+    Plotuj_r(d2r, T, tytul.d2r, legenda.d2r, label.d2r, label.x, tytul.plik.d2r, ustawienia);
+    Plotuj_fi(fi, T, tytul.fi, legenda.fi, label.fi, label.x, tytul.plik.fi, ustawienia);
+    Plotuj_fi(dfi, T, tytul.dfi, legenda.dfi, label.dfi, label.x, tytul.plik.dfi, ustawienia);
+    Plotuj_fi(d2fi, T, tytul.d2fi, legenda.d2fi, label.d2fi, label.x, tytul.plik.d2fi, ustawienia);
+    Plotuj_fi(r(2,:), r(1,:), tytul.trajektoria, legenda.trajektoria, "y [m]", "x [m]", tytul.plik.trajektoria, ustawienia);
 
     % dopisanie odpowiednich wektorów do tabeli przechowującej wyniki na
     % potrzebę pliku csv
-    saveTable.(sprintf("%s", kolumna_rx)) = r(1, :)';
-    saveTable.(sprintf("%s", kolumna_ry)) = r(2, :)';
-    saveTable.(sprintf("%s", kolumna_fi)) = fi';
-    saveTable.(sprintf("%s", kolumna_vx)) = dr(1, :)';
-    saveTable.(sprintf("%s", kolumna_vy)) = dr(2, :)';
-    saveTable.(sprintf("%s", kolumna_dfi)) = dfi';
-    saveTable.(sprintf("%s", kolumna_ax)) = d2r(1, :)';
-    saveTable.(sprintf("%s", kolumna_ay)) = d2r(2, :)';
-    saveTable.(sprintf("%s", kolumna_d2fi)) = d2fi';
+    saveTable.(sprintf("%s", kolumna.rx)) = r(1, :)';
+    saveTable.(sprintf("%s", kolumna.ry)) = r(2, :)';
+    saveTable.(sprintf("%s", kolumna.fi)) = fi';
+    saveTable.(sprintf("%s", kolumna.vx)) = dr(1, :)';
+    saveTable.(sprintf("%s", kolumna.vy)) = dr(2, :)';
+    saveTable.(sprintf("%s", kolumna.dfi)) = dfi';
+    saveTable.(sprintf("%s", kolumna.ax)) = d2r(1, :)';
+    saveTable.(sprintf("%s", kolumna.ay)) = d2r(2, :)';
+    saveTable.(sprintf("%s", kolumna.d2fi)) = d2fi';
 
 end
 
@@ -172,48 +172,39 @@ if czujniki
         end
 
         % zdefiniowanie nazw wykresów i ich opisów
-        tytul_r = "położenie czujnika " + num2str(i);
-        tytul_dr = "prędkość czujnika " + num2str(i);
-        tytul_d2r = "przyspieszenie czujnika " + num2str(i);
-        tytul_trajektoria = "trajektoraia czujnika " + num2str(i);
+        tytul.r = "położenie czujnika " + num2str(i);
+        tytul.dr = "prędkość czujnika " + num2str(i);
+        tytul.d2r = "przyspieszenie czujnika " + num2str(i);
+        tytul.trajektoria = "trajektoraia czujnika " + num2str(i);
 
-        tytul_plik_r = "czujnik_" + num2str(i) + "_r";
-        tytul_plik_dr = "czujnik_" + num2str(i) + "_dr";
-        tytul_plik_d2r = "czujnik_" + num2str(i) + "_d2r";
-        tytul_plik_trajektoria = "czujnik_" + num2str(i) + "_trajektoria";
+        tytul.plik.r = "czujnik_" + num2str(i) + "_r";
+        tytul.plik.dr = "czujnik_" + num2str(i) + "_dr";
+        tytul.plik.d2r = "czujnik_" + num2str(i) + "_d2r";
+        tytul.plik.trajektoria = "czujnik_" + num2str(i) + "_trajektoria";
 
-        legenda_r = ["r_x", "r_y"];
-        legenda_dr = ["v_x", "v_y"];
-        legenda_d2r = ["a_x", "a_y"];
-        legenda_trajektoria = "y(x)";
-
-        label_r = "położenie [m]";
-        label_dr = "v [m/s]";
-        label_d2r = "a [m/s^2]";
-
-        kolumna_rx = "czujnik_" + num2str(i) + "_rx";
-        kolumna_ry = "czujnik_" + num2str(i) + "_ry";
-        kolumna_vx = "czujnik_" + num2str(i) + "_vx";
-        kolumna_vy = "czujnik_" + num2str(i) + "_vy";
-        kolumna_ax = "czujnik_" + num2str(i) + "_ax";
-        kolumna_ay = "czujnik_" + num2str(i) + "_ay";
+        kolumna.rx = "czujnik_" + num2str(i) + "_rx";
+        kolumna.ry = "czujnik_" + num2str(i) + "_ry";
+        kolumna.vx = "czujnik_" + num2str(i) + "_vx";
+        kolumna.vy = "czujnik_" + num2str(i) + "_vy";
+        kolumna.ax = "czujnik_" + num2str(i) + "_ax";
+        kolumna.ay = "czujnik_" + num2str(i) + "_ay";
 
         % przekazanie danych o wykresach i-tego czujnika do pomocniczych funkcji
         % plotujących i zapisujących do plików pdf
         disp("drukuję czujnik " + num2str(i));
-        Plotuj_r(r_czuj, T, tytul_r, legenda_r, label_r, label_x, tytul_plik_r, ustawienia);
-        Plotuj_r(dr_czuj, T, tytul_dr, legenda_dr, label_dr, label_x, tytul_plik_dr, ustawienia);
-        Plotuj_r(d2r_czuj, T, tytul_d2r, legenda_d2r, label_d2r, label_x, tytul_plik_d2r, ustawienia);
-        Plotuj_fi(r_czuj(2,:), r_czuj(1,:), tytul_trajektoria, legenda_trajektoria, "y [m]", "x [m]", tytul_plik_trajektoria, ustawienia);
+        Plotuj_r(r_czuj, T, tytul.r, legenda.r, label.r, label.x, tytul.plik.r, ustawienia);
+        Plotuj_r(dr_czuj, T, tytul.dr, legenda.dr, label.dr, label.x, tytul.plik.dr, ustawienia);
+        Plotuj_r(d2r_czuj, T, tytul.d2r, legenda.d2r, label.d2r, label.x, tytul.plik.d2r, ustawienia);
+        Plotuj_fi(r_czuj(2,:), r_czuj(1,:), tytul.trajektoria, legenda.trajektoria, "y [m]", "x [m]", tytul.plik.trajektoria, ustawienia);
 
         % dopisanie odpowiednich wektorów do tabeli przechowującej wyniki na
         % potrzebę pliku csv
-        saveTable.(sprintf("%s", kolumna_rx)) = r_czuj(1, :)';
-        saveTable.(sprintf("%s", kolumna_ry)) = r_czuj(2, :)';
-        saveTable.(sprintf("%s", kolumna_vx)) = r_czuj(1, :)';
-        saveTable.(sprintf("%s", kolumna_vy)) = r_czuj(2, :)';
-        saveTable.(sprintf("%s", kolumna_ax)) = d2r_czuj(1, :)';
-        saveTable.(sprintf("%s", kolumna_ay)) = d2r_czuj(2, :)';
+        saveTable.(sprintf("%s", kolumna.rx)) = r_czuj(1, :)';
+        saveTable.(sprintf("%s", kolumna.ry)) = r_czuj(2, :)';
+        saveTable.(sprintf("%s", kolumna.vx)) = r_czuj(1, :)';
+        saveTable.(sprintf("%s", kolumna.vy)) = r_czuj(2, :)';
+        saveTable.(sprintf("%s", kolumna.ax)) = d2r_czuj(1, :)';
+        saveTable.(sprintf("%s", kolumna.ay)) = d2r_czuj(2, :)';
     end
 end
 
