@@ -51,5 +51,10 @@ wykres = figure('Visible', ustawienia.wyswietl);
         end
 
         savePath = fullfile("Wyniki", plik_t);
-   print(gcf, savePath, '-dpdf', '-r300', '-vector');
+   
+   if strcmp(ustawienia.format, "pdf")
+       print(gcf, savePath, '-dpdf', '-r300', '-vector');
+   else
+       print(gcf, savePath, '-dpng', '-r300');
+   end
 end

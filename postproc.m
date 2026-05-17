@@ -18,7 +18,13 @@ T = wynik.T;
 saveTable = table();
 saveTable.czas = T';
 
-[answer, tf] = handle_input_dlg(c);
+[answer, tf, answer2, tf2] = handle_input_dlg(c);
+
+if tf2 && answer2 == 1
+    ustawienia.format = "pdf";
+else
+    ustawienia.format = "png";
+end
 
 %% ===================== setup wykresów =====================
 
