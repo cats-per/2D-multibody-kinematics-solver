@@ -1,4 +1,7 @@
 *.asv
 *.pdf
 *.mat
+*.png
 Wyniki/
+ruchy/
+porownanie.m

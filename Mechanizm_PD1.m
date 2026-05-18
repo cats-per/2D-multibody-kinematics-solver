@@ -28,4 +28,4 @@ end
 
 disp("Zakończono obliczenia");
 save("wynik_PD1", "T", "Q", "DQ", "D2Q");
-postproc();
+%postproc();

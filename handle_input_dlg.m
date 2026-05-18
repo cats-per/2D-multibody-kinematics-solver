@@ -1,10 +1,18 @@
-function [answer, tf] = handle_input_dlg(c)
+function [answer1, tf1, answer2, tf2] = handle_input_dlg(c)
+% pomocnicza funkcja zwracająca wybór użytkownika co do wyświetlania
+% wykresów dla zaznaczonych wykresów oraz format docelowych plików z
+% wykresami
 
 for i = 1:numel(c.x)
-    list_string{i} = "c" + num2str(i);
+    list_string1{i} = "c" + num2str(i);
 end
 
-prompt = "Które człony wyświetlić?";
+list_string2 = {"PDF";
+                "PNG"};
 
-[answer, tf] = listdlg("ListString", list_string, "PromptString", prompt, "Name", "Wybór", "SelectionMode","multiple");
+prompt1 = "Które człony wyświetlić?";
+prompt2 = "Jaki format pliku?";
+
+[answer1, tf1] = listdlg("ListString", list_string1, "PromptString", prompt1, "Name", "Wybór", "SelectionMode","multiple");
+[answer2, tf2] = listdlg("ListString", list_string2, "PromptString", prompt2, "Name", "Wybór", "SelectionMode", "single");
 end
