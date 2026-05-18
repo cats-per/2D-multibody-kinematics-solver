@@ -3,7 +3,7 @@
 % parametry symulacji
 eps = 1e-10;    % wymagana dokładność
 t_k = 2*pi;      % czas zakończenia symulacji [s]
-dt = 0.05;      % długość kroku czasowego [s]
+dt = 0.02;      % długość kroku czasowego [s]
 
 % środki mas członów (posłużą za lokalne układy współrzędnych)
 c.x = [-0.95 0.4 0.6 -0.15 -0.35 -0.05 0.25 0.35 0.4 0.6];
@@ -75,13 +75,13 @@ postep_kier(1).ciala = [7 8];
 postep_kier(1).pkt_pocz = [0.2 0.6]';
 postep_kier(1).pkt_kon = [0.4 -0.2]';
 postep_kier(1).s = 'l_mn + a_mn * sin(omega_mn * t + fi_mn)';
-l_mn = sqrt(0.2^2 + 0.8^2); a_mn = 0.05; omega_mn = 1; fi_mn = 0;
+l_mn = sqrt(0.2^2 + 0.8^2); a_mn = -0.05; omega_mn = 1; fi_mn = 0;
 
 postep_kier(2).ciala = [9 10];
 postep_kier(2).pkt_pocz = [0.3 0.6]';
 postep_kier(2).pkt_kon = [0.7 -0.4]';
 postep_kier(2).s = 'l_gh + a_gh * sin(omega_gh * t + fi_gh)';
-l_gh = sqrt(0.4^2 + 1); a_gh = 0.05; omega_gh = 2; fi_gh = 0;
+l_gh = sqrt(0.4^2 + 1); a_gh = -0.05; omega_gh = 2; fi_gh = 0;
 
 postep_kier = policzoffset(postep_kier, c);
 

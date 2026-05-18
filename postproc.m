@@ -84,6 +84,7 @@ for i = 1:numel(c.x)
         ustawienia.wyswietl = 'on';
     else
         ustawienia.wyswietl = 'off';
+        continue
     end
 
     % zdefiniowanie nazw wykresów i ich opisów
